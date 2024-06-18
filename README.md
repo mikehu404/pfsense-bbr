@@ -36,7 +36,15 @@ You will also need to apply the following changes:
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 
 #### pfSense GUI
-
+- Go to the folder `/tools/templates/pkg_repos/` and rename the file `pfSense-repo.conf` to `libreSense-repo.conf`
+- Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`, and the content of `pkg_prefix` by `libreSense-pkg-`.
+- In the folder `/src/usr/local/share/`, rename the folder `pfSense` to `libreSense`.
+- In the folder `/src/etc/`, rename the files `pfSense-ddb.conf` and `pfSense-devd.conf` to `libreSense-ddb.conf` and `libreSense-devd.conf`.
+- Edit the file `/tools/builder_defaults.sh`:
+  - Remove`drm2` and `ndis` from the variable `MODULES_OVERRIDE_amd64`.
+  - Add `if_epair if_vxlan tcp/bbr tcp/rack accf_http accf_data accf_dns if_wg linuxkpi_hdmi pchtherm fusefs` to variable `MODULES_OVERRIDE_base`.
+  - Change variable `PKG_REPO_BRANCH_RELEASE` to `v2_7_2`.
+  - Change variable `PFSENSE_DEFAULT_REPO` to `"${PRODUCT_NAME}-repo"`.
 
 </details>
 
