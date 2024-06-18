@@ -314,4 +314,9 @@ diff --text /tmp/kernel.config /tmp/kernel.old.config
 ## Buy me a coffee
 
 </summary>
+
+# [hetzner referral link](https://hetzner.cloud/?ref=aY3GsPMrFDw9)
+# [vultr referral link](https://www.vultr.com/?ref=7165805)
+# [speedypage referral link](https://my.speedypage.com/aff.php?aff=440)
+
 </details>
