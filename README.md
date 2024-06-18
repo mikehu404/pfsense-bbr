@@ -248,6 +248,13 @@ sockstat -SPtcp
 <summary>
 
 ## Speedtest benchmark
+Install `py311-speedtest-cli` on pfSense box  
+Here is my result:
+| Configuation | Download | Upload |
+| -------- | -------- | ------- |
+| Default | 1294.78 Mbit/s | 975.52 Mbit/s |
+| Default + htcp | 1285.62 Mbit/s | 1041.47 Mbit/s |
+| BBR | 1317.20 Mbit/s | 1301.95 Mbit/s |
 
 </summary>
 </details>
