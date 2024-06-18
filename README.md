@@ -160,7 +160,35 @@ rm -rf tmp/obj
 
 ./build.sh --build-kernels
 ```
+You can find the kernel in `./tmp/libreSense_v2_7_2_amd64-core/` after build complete.
 
+### (Optional) Convert PKG to tar
+```
+mv ./tmp/libreSense_v2_7_2_amd64-core/.*/All/libreSense-kernel-libreSense-2.7.2.pkg /tmp/
+
+cd /tmp/
+
+tar -xvf libreSense-kernel-libreSense-2.7.2.pkg
+
+gzip -d boot/kernel/kernel.gz
+
+cd boot && tar -cpvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar kernel/
+```
+
+### Install the kernel
+[Enable SSH](https://docs.netgate.com/pfsense/en/latest/recipes/ssh-access.html) on pfSense box
+```
+# Copy the kernel to pfSense box
+scp /path/to/your/package admin@pfsense_box_IP:/tmp/
+
+# Direct install via PKG
+pkg add -f /tmp/libreSense-kernel-libreSense-2.7.2.pkg
+
+# Or Install the kernel via tar
+mv /boot/kernel /boot/kernel.old
+cd /tmp && tar -xvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar && mv kernel /boot/kernel
+```
+Reboot the pfSense box 
 </details>
 
 <details open>
