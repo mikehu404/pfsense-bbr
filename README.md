@@ -2,7 +2,7 @@
 I mostly follow [the guide of Augustin-FL](https://github.com/Augustin-FL/building-pfsense-iso-from-source), except I only tend to build a working kernel with bbr support instead of the whole ISO.
 Currently only tested in pfSense CE 2.7.2
 
-<details>
+<details open>
 <summary>
 
 ## Fork pfSense repo and make changes
@@ -40,7 +40,7 @@ You will also need to apply the following changes:
 
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Prepare FreeBSD build machine
@@ -49,7 +49,7 @@ You will also need to apply the following changes:
 
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Build & install the custom kernel
@@ -57,7 +57,7 @@ You will also need to apply the following changes:
 </summary>
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Enable BBR in pfSense
@@ -65,7 +65,7 @@ You will also need to apply the following changes:
 </summary>
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Speedtest benchmark
@@ -73,7 +73,7 @@ You will also need to apply the following changes:
 </summary>
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Difference between official kernel and custom kernel
@@ -81,7 +81,7 @@ You will also need to apply the following changes:
 </summary>
 </details>
 
-<details>
+<details open>
 <summary>
 
 ## Buy me a coffee
