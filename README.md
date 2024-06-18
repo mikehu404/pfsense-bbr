@@ -23,6 +23,7 @@ You will also need to apply the following changes:
 #### FreeBSD Source
 - Checkout branch `RELENG_2_7_2`.
 - In the folder `/release/conf/`, rename files starting with `pfSense` to `libreSense`
+
 | Original Name    | New Name |
 | -------- | ------- |
 | pfSense_build_src.conf | libreSense_src.conf |
