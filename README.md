@@ -35,11 +35,13 @@ You will also need to apply the following changes:
 
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 - Add the following options to file `sys/amd64/conf/DEFAULTS`
-`options         FUSEFS
+```
+options         FUSEFS
 options         VIMAGE
 makeoptions     WITH_EXTRA_TCP_STACKS=1
 options         TCPHPTS
-options         RATELIMIT`
+options         RATELIMIT
+```
 
 #### pfSense GUI
 - Go to the folder `/tools/templates/pkg_repos/` and rename the file `pfSense-repo.conf` to `libreSense-repo.conf`
