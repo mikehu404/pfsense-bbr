@@ -71,7 +71,7 @@ options         RATELIMIT
 </summary>
 
 ### Install FreeBSD
-Since we only need to build kernel, high amount of disk, CPU or memory isn't needed. Insatll Freebsd in ZFS is optional but recommended.  
+Since we only need to build kernel, high amount of disk, CPU or memory isn't needed. Insatll Freebsd on ZFS is optional but recommended.  
 For easy build, rent a [VPS from hetzner](https://hetzner.cloud/?ref=aY3GsPMrFDw9), choose CX22, this will give us 2 CPU + 4 G Ram + 40 SSD, which is more than enough for building a kernel.   
 
 ![hetzner vps](https://github.com/mikehu404/pfsense-bbr/blob/main/Image/VPS.png?raw=true)
@@ -146,6 +146,20 @@ export DEFAULT_ARCH_LIST="amd64.amd64" # We only want to build an x64 ISO, we do
 ## Build & install the custom kernel
 
 </summary>
+
+First, start a screen on your build server, using command `screen -S build`. You may leave this screen using ctrl+A then D, and you may enter this screen again using command `screen -r build`. The purpose of the screen is to keep your work running if you disconnect from the build server.
+
+### Build the kernel
+```
+cd /root/pfsense
+
+./build.sh --clean-builder
+
+rm -rf tmp/obj
+
+./build.sh --build-kernels
+```
+
 </details>
 
 <details open>
