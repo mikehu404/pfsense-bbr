@@ -3,3 +3,24 @@ I mostly follow [the guide of Augustin-FL](https://github.com/Augustin-FL/buildi
 <details>
 <summary>Prepare FreeBSD build machine</summary>
 </details>
+
+<details>
+<summary>Fork pfSense repo and make changes</summary>
+</details>
+
+<details>
+<summary>Build & install the custom kernel</summary>
+</details>
+
+<details>
+<summary>Enable BBR in pfSense</summary>
+</details>
+
+<details>
+<summary>Speedtest benchmark</summary>
+</details>
+
+<details>
+<summary>Difference between official kernel and custom kernel</summary>
+</details>
+
