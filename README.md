@@ -182,7 +182,10 @@ cd boot && tar -cpvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar kernel/
 [Enable SSH](https://docs.netgate.com/pfsense/en/latest/recipes/ssh-access.html) on pfSense box
 ```
 # Copy the kernel to pfSense box
-scp /path/to/your/package admin@pfsense_box_IP:/tmp/
+scp /path/to/your/package admin@pfsense_box_IP:/tmp/   
+
+# SSH to pfSense box
+ssh admin@pfsense_box_IP
 
 # Direct install via PKG
 pkg add -f /tmp/libreSense-kernel-libreSense-2.7.2.pkg
@@ -191,7 +194,7 @@ pkg add -f /tmp/libreSense-kernel-libreSense-2.7.2.pkg
 mv /boot/kernel /boot/kernel.old
 cd /tmp && tar -xvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar && mv kernel /boot/kernel
 ```
-Reboot the pfSense box 
+[Reboot the pfSense box](https://docs.netgate.com/pfsense/en/latest/diagnostics/system-reboot.html)
 </details>
 
 <details open>
@@ -200,6 +203,15 @@ Reboot the pfSense box
 ## Enable BBR in pfSense
 
 </summary>
+
+
+
+
+
+
+
+
+
 </details>
 
 <details open>
