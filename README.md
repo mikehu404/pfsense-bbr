@@ -72,7 +72,10 @@ options         RATELIMIT
 
 ### Install FreeBSD
 Since we only need to build kernel, high amount of disk, CPU or memory isn't needed.  
-For easy build, rent a [VPS from hetzner](https://hetzner.cloud/?ref=aY3GsPMrFDw9)  chose CX22, this will give us 2 CPU + 4 G Ram + 40 SSD, which is more than enough for building a kernel.   
+For easy build, rent a [VPS from hetzner](https://hetzner.cloud/?ref=aY3GsPMrFDw9), chose CX22, this will give us 2 CPU + 4 G Ram + 40 SSD, which is more than enough for building a kernel.   
+
+![hetzner vps](https://github.com/mikehu404/pfsense-bbr/blob/main/Image/VPS.png?raw=true)
+
 Plus their VPS service is hourly billed, and our entire build time should be under 1 hour. So this won't cost us any money.  
 
 
