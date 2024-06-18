@@ -117,7 +117,8 @@ git checkout RELENG_2_7_2 # Replace by the branch of pfSense GUI to build.
 Create a file called build.conf in the folder of pfSense GUI.
 
 ```
-#set -x # uncomment this for debugging
+# uncomment this for debugging  
+#set -x  
 
 export PRODUCT_NAME="libreSense" # Replace with your product name
 export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # Location of your FreeBSD sources repository
