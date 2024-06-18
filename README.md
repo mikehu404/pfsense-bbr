@@ -3,23 +3,30 @@ I mostly follow [the guide of Augustin-FL](https://github.com/Augustin-FL/buildi
 Currently only tested in pfSense CE 2.7.2
 
 <details>
-<summary>Fork pfSense repo and make changes</summary>
-# Fork pfSense repo
-You will then have to fork 3 repositories: 
-- [pfSense GUI](https://github.com/pfsense/pfsense)
-- [FreeBSD Ports](https://github.com/pfsense/freebsd-ports)
-- [FreeBSD Kernel Source](https://github.com/pfsense/freebsd-src)
+<summary>#Fork pfSense repo and make changes</summary>
+## Fork pfSense repo
+You will then have to fork 3 repositories: \
+- [pfSense GUI](https://github.com/pfsense/pfsense) \
+- [FreeBSD Ports](https://github.com/pfsense/freebsd-ports) \
+- [FreeBSD Kernel Source](https://github.com/pfsense/freebsd-src) \
 
-# Make changes
-Choose a custom name for your firewall (because of trademark). I'll use libreSense for this tutorial.
+## Make changes
+Choose a custom name for your firewall (because of trademark). I'll use libreSense for this tutorial. \
 
-You will also need to apply the following changes:
+You will also need to apply the following changes: \
 
 ### FreeBSD Source
 - Checkout branch `RELENG_2_7_2`.
 - In the folder `/release/conf/`, rename files starting with `pfSense` to `libreSense`
---- `pfSense_install_src.conf` => `libreSense_install_src.conf`)
-  
+| Original Name    | New Name |
+| -------- | ------- |
+| pfSense_build_src.conf | libreSense_src.conf |
+| pfSense_install_src.conf | libreSense_install_src.conf |
+| pfSense_installer_make.conf | libreSense_installer_make.conf |
+| pfSense_installer_src.conf | pfSense_installer_src.conf |
+| pfSense_make.conf | pfSense_make.conf |
+| pfSense_src-env.conf | pfSense_src-env.conf |
+
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 
 ### pfSense GUI
