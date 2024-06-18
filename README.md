@@ -80,7 +80,7 @@ For easy build, rent a [VPS from hetzner](https://hetzner.cloud/?ref=aY3GsPMrFDw
 
 Plus their VPS service is hourly billed, and our entire build time should be under 1 hour. So this won't cost us any money.  
 
-### configurate the build server
+### Configurate the build server
 Login as root and execute following commands:
 
 ```
@@ -191,10 +191,15 @@ ssh admin@pfsense_box_IP
 pkg add -f /tmp/libreSense-kernel-libreSense-2.7.2.pkg
 
 # Or Install the kernel via tar
-mv /boot/kernel /boot/kernel.old
+mv /boot/kernel /boot/kernel.default
 cd /tmp && tar -xvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar && mv kernel /boot/kernel
+
+# Load bbr on boot
+sysrc kld_list+="tcp_rack tcp_bbr"
 ```
+
 [Reboot the pfSense box](https://docs.netgate.com/pfsense/en/latest/diagnostics/system-reboot.html)
+
 </details>
 
 <details open>
@@ -204,13 +209,38 @@ cd /tmp && tar -xvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar && mv kernel /boot/ke
 
 </summary>
 
+### Load BBR
+Add the following values to [System Tunables](https://docs.netgate.com/pfsense/en/latest/config/advanced-tunables.html)
+```
+# set to at least 16MB for 10GE hosts
+kern.ipc.maxsockbuf=16777216
 
+# set autotuning maximum to at least 16MB too
+net.inet.tcp.sendbuf_max=16777216
+net.inet.tcp.recvbuf_max=16777216
 
+# enable send/recv autotuning
+net.inet.tcp.sendbuf_auto=1
+net.inet.tcp.recvbuf_auto=1
 
+# increase autotuning step size
+net.inet.tcp.sendbuf_inc=16384
+net.inet.tcp.recvbuf_inc=524288
 
+# set this on test/measurement hosts
+#net.inet.tcp.hostcache.expire=1
 
+# Set bbr
+net.inet.tcp.functions_default=bbr
+net.inet.tcp.functions_inherit_listen_socket_stack=0
+```
 
-
+After reboot verify BBR is loaded
+```
+sysctl net.inet.tcp.cc.algorithm
+sysctl net.inet.tcp.functions_available
+sockstat -SPtcp
+```
 
 </details>
 
