@@ -71,20 +71,70 @@ options         RATELIMIT
 </summary>
 
 ### Install FreeBSD
-Since we only need to build kernel, high amount of disk, CPU or memory isn't needed.  
+Since we only need to build kernel, high amount of disk, CPU or memory isn't needed. Insatll Freebsd in ZFS is optional but recommended.  
 For easy build, rent a [VPS from hetzner](https://hetzner.cloud/?ref=aY3GsPMrFDw9), chose CX22, this will give us 2 CPU + 4 G Ram + 40 SSD, which is more than enough for building a kernel.   
 
 ![hetzner vps](https://github.com/mikehu404/pfsense-bbr/blob/main/Image/VPS.png?raw=true)
 
 Plus their VPS service is hourly billed, and our entire build time should be under 1 hour. So this won't cost us any money.  
 
+### configurate the build server
+Login as root and execute following commands:
 
+```
+# Make sure system is up to date
+pkg update -f && pkg upgrade && pkg autoremove
 
+# Allow SSH using root, if you want it.
+echo PermitRootLogin yes >> /etc/ssh/sshd_config
+service sshd restart
 
+# Required for configuring the server
+pkg install -y pkg vim nano emacs
 
+# Required for building kernel
+pkg install -y git-lite curl xmlstarlet pkgconf openssl
 
+# not required but advised for building/monitoring/debugging
+pkg install -y htop screen wget mmv 
 
+# Only install this if your FreeBSD is a virtual machine, eg. VPS
+pkg install -y open-vm-tools
+```
 
+### Configure how pfSense will be built
+Clone your fork of pfSense GUI, checkout to the branch that will be built.
+
+```
+cd /root
+git clone https://github.com/{your username}/pfsense.git
+cd pfsense
+git checkout RELENG_2_7_2 # Replace by the branch of pfSense GUI to build.
+```
+
+Create a file called build.conf in the folder of pfSense GUI.
+
+```
+#set -x # uncomment this for debugging
+
+export PRODUCT_NAME="libreSense" # Replace with your product name
+export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # Location of your FreeBSD sources repository
+export POUDRIERE_PORTS_GIT_URL=https://github.com/{your username}/FreeBSD-ports.git # Location your FreeBSD ports repository
+
+export FREEBSD_BRANCH=RELENG_2_7_2 # Branch of FreeBSD sources to build
+
+# The branch of FreeBSD ports to build is set automatically based on pfSense GUI branch.
+# If you would like to build a specific branch of FreeBSD ports, the variable to set is POUDRIERE_PORTS_GIT_BRANCH
+# Also, if you are building a FreeBSD port branch that does not respect Netgate conventions (devel or RELENG_*),
+# You will also have to update .conf files in "tools/templates/pkg_repos/" because repositories names are partially
+# hardcoded there.
+
+# Netgate support creation of staging builds (pre-dev, nonpublic version)
+unset USE_PKG_REPO_STAGING # This disable staging build
+
+# The kind of ISO that will be built (stable or development) is defined in src/etc/version in pfSense GUI repo
+export DEFAULT_ARCH_LIST="amd64.amd64" # We only want to build an x64 ISO, we don't care of ARM versions
+```
 
 </details>
 
