@@ -248,7 +248,7 @@ sockstat -SPtcp
 <summary>
 
 ## Speedtest benchmark
-Install `py311-speedtest-cli` on pfSense box  
+Install `py311-speedtest-cli` on pfSense box and use `speedtest` command to benchmark internet speed.
 Here is my result:
 | Configuration | Download | Upload |
 | -------- | -------- | ------- |
@@ -265,6 +265,47 @@ Here is my result:
 ## Difference between official kernel and custom kernel
 
 </summary>
+
+Difference between kernel modules
+```
+diff /boot/kernel /boot/kernel.old | grep "Only in"
+Only in /boot/kernel: accf_data.ko
+Only in /boot/kernel: accf_dns.ko
+Only in /boot/kernel: accf_http.ko
+Only in /boot/kernel: cc_chd.ko
+Only in /boot/kernel: if_epair.ko
+Only in /boot/kernel: if_qlnxev.ko
+Only in /boot/kernel: if_vxlan.ko
+Only in /boot/kernel: ipfw_nat64.ko
+Only in /boot/kernel: qlnxr.ko
+Only in /boot/kernel: t4_tom.ko
+Only in /boot/kernel: tcp_bbr.ko
+Only in /boot/kernel: tcp_rack.ko
+```
+
+Difference between kernel options
+```
+/usr/sbin/config -x /boot/kernel.old/kernel > /tmp/kernel.old.config
+/usr/sbin/config -x /boot/kernel/kernel > /tmp/kernel.config
+diff --text /tmp/kernel.config /tmp/kernel.old.config
+7d6
+< makeoptions   WITH_EXTRA_TCP_STACKS=1
+8a8
+> options       RATELIMIT
+144a145
+> options       VIMAGE
+148,152d148
+< options       ACCEPT_FILTER_HTTP
+< options       RATELIMIT
+< options       TCPHPTS
+< options       VIMAGE
+< options       FUSEFS
+161d156
+< options       VIMAGE
+166d160
+< options       RATELIMIT
+```
+
 </details>
 
 <details open>
