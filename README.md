@@ -152,26 +152,29 @@ First, start a screen on your build server, using command `screen -S build`. You
 
 ### Build the kernel
 ```
+# Enter the folder of pfSense GUI 
 cd /root/pfsense
 
+# Clean up the build
 ./build.sh --clean-builder
 
-rm -rf tmp/obj
-
+# Build the kernel
 ./build.sh --build-kernels
 ```
 You can find the kernel in `./tmp/libreSense_v2_7_2_amd64-core/` after build complete.
 
 ### (Optional) Convert PKG to tar
 ```
+# move the pkg to temporary work space
 mv ./tmp/libreSense_v2_7_2_amd64-core/.*/All/libreSense-kernel-libreSense-2.7.2.pkg /tmp/
 
-cd /tmp/
+# extract the pkg
+cd /tmp/ && tar -xvf libreSense-kernel-libreSense-2.7.2.pkg
 
-tar -xvf libreSense-kernel-libreSense-2.7.2.pkg
-
+# extract the kernel
 gzip -d boot/kernel/kernel.gz
 
+# repack the pkg to tar
 cd boot && tar -cpvf pfSense-bbr-vnet-fuse-kernel-2.7.2.tar kernel/
 ```
 
