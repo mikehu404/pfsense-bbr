@@ -1,6 +1,11 @@
 # Custom pfSense kernel build with bbr, epair, vxlan and fusefs support.
 I mostly follow [the guide of Augustin-FL](https://github.com/Augustin-FL/building-pfsense-iso-from-source), except I only tend to build a working kernel with bbr support instead of the whole ISO.
+
 Currently only tested in pfSense CE 2.7.2
+
+BBR : Google TCP BBR congestion control.
+epair and vxlan : FreeBSD jail vnet support.
+fusefs : For the ability to mount external hard drive.
 
 <details open>
 <summary>
